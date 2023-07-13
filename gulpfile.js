@@ -39,4 +39,4 @@ export function watchTask() {
 }
 
 // Tâche par défaut
-export default series(optimizeImg, webpImage, runSharp);
+export default series(optimizeImg, webpImage, runSharp, watchTask);
