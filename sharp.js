@@ -1,36 +1,39 @@
-// eu besoin de changer en format import et non const = ..
-// du fait que gulpfile necessite avec 'imagemin' de mettre type:module dans pkg.json je dois changer ici mon js en mjs.
-import sharp from'sharp';
+// Importations nécessaires
+import sharp from 'sharp';
 import glob from 'glob';
 import path from 'path';
 import fs from 'fs';
 
+// Définition des dossiers source et de destination
 const sourceFolder = 'dist/images/webp/*.webp';
 const destinationFolder = 'dist/images/resized/';
 
-// Fonction pour redimensionner les images avec Sharp
+// Fonction principale pour le redimensionnement des images
 function resizeImages() {
-  // créé fichier s'il n'existe pas
+  // Créer le dossier de destination s'il n'existe pas
   if (!fs.existsSync(destinationFolder)) {
     fs.mkdirSync(destinationFolder);
   }
+
   // Récupérer la liste des images à traiter
   const images = glob.sync(sourceFolder);
 
-  // Parcourir les images et les redimensionner
+  // Redimensionner chaque image
   images.forEach(image => {
     const filename = path.basename(image, '.webp');
     sharp(image)
       .resize(200, 200)
       .toFile(`${destinationFolder}${filename}-resized.webp`, (err, info) => {
+        // Gérer les erreurs
         if (err) {
           console.error(err);
         } else {
+          // Afficher un message de succès pour chaque image redimensionnée
           console.log(`Image ${filename} redimensionnée avec succès.`);
         }
       });
   });
 }
 
-// Appeler la fonction pour redimensionner les images
+// Lancer le processus de redimensionnement des images
 resizeImages();
