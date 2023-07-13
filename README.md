@@ -1,14 +1,14 @@
 # Optimisation d'images avec Gulp et Sharp
 
-Ce projet fournit un pipeline d'optimisation d'images en utilisant Gulp pour la minification et la conversion en WebP, et Sharp pour le redimensionnement.
+Ce projet propose une chaîne de traitement d'optimisation d'images à l'aide de Gulp pour la minification et la conversion en WebP, et Sharp pour le redimensionnement.
 
 ## Prérequis
 
-Node.js et npm doivent être installés sur votre machine. Vous pouvez les télécharger à partir de [https://nodejs.org/](https://nodejs.org/).
+Node.js et npm doivent être installés sur votre machine. Vous pouvez les télécharger depuis [https://nodejs.org/](https://nodejs.org/).
 
 ## Installation
 
-Suivez les étapes suivantes pour installer les dépendances nécessaires :
+Suivez les étapes ci-dessous pour installer les dépendances nécessaires :
 
 1. Initialisez votre projet Node.js avec la commande suivante :
 
@@ -32,7 +32,7 @@ Suivez les étapes suivantes pour installer les dépendances nécessaires :
     npm install --save-dev gulp-imagemin imagemin-mozjpeg imagemin-optipng
     ```
 
-    > **Note :** À partir de la version 8.0.0, gulp-imagemin utilise la syntaxe ESM, ce qui signifie que vous devez utiliser `import` au lieu de `require` pour importer vos dépendances. Assurez-vous d'ajouter `"type": "module"` dans votre fichier `package.json`.
+    > **Note :** À partir de la version 8.0.0, gulp-imagemin utilise la syntaxe ESM, vous devez donc utiliser `import` plutôt que `require` pour importer vos dépendances. Assurez-vous d'ajouter `"type": "module"` à votre fichier `package.json`.
 
 4. Pour le redimensionnement des images, nous utilisons Sharp. Vous pouvez l'installer avec la commande suivante :
 
@@ -48,7 +48,7 @@ Suivez les étapes suivantes pour installer les dépendances nécessaires :
 
 2. Configurez votre tâche gulp en définissant les fonctions, les tâches de surveillance, et les tâches par défaut.
 
-    > **Note :** Un script de surveillance est inclus dans `gulpfile.js` pour observer automatiquement les changements dans vos images et réexécuter les tâches correspondantes.
+    > **Note :** Un script d'observation est inclus dans `gulpfile.js` pour surveiller automatiquement les modifications apportées à vos images et réexécuter les tâches appropriées.
 
 3. Exécutez la tâche gulp avec la commande suivante :
 
@@ -56,6 +56,16 @@ Suivez les étapes suivantes pour installer les dépendances nécessaires :
     npx gulp
     ```
 
-Le pipeline d'optimisation des images fonctionne comme suit : Gulp minifie d'abord les images et les convertit en WebP, puis Sharp redimensionne les images et les enregistre dans un dossier séparé.
+La chaîne de traitement d'optimisation des images fonctionne comme suit : Gulp minifie d'abord les images et les convertit en WebP, puis Sharp redimensionne les images et les enregistre dans un dossier séparé.
 
-Dans ce processus, nous utilisons `import { exec } from 'child_process';` dans notre fichier `gulpfile.js` pour exécuter une commande Node.js. Cette commande est utilisée pour exécuter notre fichier `sharp.mjs` comme une tâche gulp, ce qui permet un enchaînement fluide des tâches d'optimisation des images.
+Nous utilisons `import { exec } from 'child_process';` dans notre fichier `gulpfile.js` pour exécuter une commande Node.js. Cette commande est utilisée pour exécuter notre fichier `sharp.mjs` comme une tâche gulp, permettant une fluidité dans l'enchaînement des tâches d'optimisation d'images.
+
+## Limitation de compatibilité ESM
+
+À partir de la version 8.0.0, `gulp-imagemin` utilise le format ESM qui n'est pas encore entièrement pris en charge par tous les environnements ou outils de construction, comme Eleventy par exemple. Si vous rencontrez des problèmes avec l'usage du format ESM dans votre projet, vous pouvez envisager les options suivantes :
+
+1. Utilisez une version antérieure de `gulp-imagemin` qui utilise la syntaxe CommonJS (`require`). Assurez-vous alors de réécrire les fichiers concernés en conséquence.
+
+2. Explorez d'autres outils ou plugins d'optimisation d'images qui sont compatibles avec votre environnement de projet.
+
+Ces solutions peuvent aider à surmonter les problèmes de compatibilité potentiels avec l'usage du format ESM.
