@@ -1,3 +1,5 @@
+# PROJET EN PAUSE pour cause d'incompatibilité ESM
+
 # Optimisation d'images avec Gulp et Sharp
 
 Ce projet propose une chaîne de traitement d'optimisation d'images à l'aide de Gulp pour la minification et la conversion en WebP, et Sharp pour le redimensionnement.
