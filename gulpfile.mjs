@@ -18,7 +18,7 @@ export function runSharp(cb) {
 
 // Optimisation des images
 export function optimizeImg() {
-    return src(['src/images/*.{jpg,png}'])
+    return src(['src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}'])
         .pipe(imagemin([
             imageminMozjpeg({quality:70, progressive:true}),
             imageminOptipng({optimizationLevel:2}),
@@ -28,14 +28,14 @@ export function optimizeImg() {
 
 // Conversion des images en webp
 export function webpImage() {
-    return src('dist/images/*.{jpg,png}')
+    return src('dist/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}')
         .pipe(imagewebp())
         .pipe(dest('dist/images/webp'));
 }
 
 // Tâche d'observation
 export function watchTask() {
-    watch('src/images/*.{jpg,png}', series(optimizeImg, webpImage));
+    watch('src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}', series(optimizeImg, webpImage));
 }
 
 // Tâche par défaut
