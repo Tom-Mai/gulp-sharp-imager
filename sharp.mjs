@@ -12,7 +12,7 @@ const destinationFolder = 'dist/images/resized/';
 function resizeImages() {
   // Créer le dossier de destination s'il n'existe pas
   if (!fs.existsSync(destinationFolder)) {
-    fs.mkdirSync(destinationFolder);
+    fs.mkdirSync(destinationFolder, { recursive: true });
   }
 
   // Récupérer la liste des images à traiter
