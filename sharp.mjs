@@ -1,15 +1,24 @@
-// Importations nécessaires
 import sharp from 'sharp';
 import glob from 'glob';
 import path from 'path';
 import fs from 'fs';
+import pMap from 'p-map'; // Nouvelle importation
 
 // Définition des dossiers source et de destination
 const sourceFolder = 'dist/images/webp/*.webp';
 const destinationFolder = 'dist/images/resized/';
 
+// Fonction pour redimensionner une seule image
+async function resizeImage(image) {
+  const filename = path.basename(image, '.webp');
+  await sharp(image)
+    .resize(200, 200)
+    .toFile(`${destinationFolder}${filename}-resized.webp`);
+  console.log(`Image ${filename} redimensionnée avec succès.`);
+}
+
 // Fonction principale pour le redimensionnement des images
-function resizeImages() {
+async function resizeImages() {
   // Créer le dossier de destination s'il n'existe pas
   if (!fs.existsSync(destinationFolder)) {
     fs.mkdirSync(destinationFolder, { recursive: true });
@@ -19,21 +28,8 @@ function resizeImages() {
   const images = glob.sync(sourceFolder);
 
   // Redimensionner chaque image
-  images.forEach(image => {
-    const filename = path.basename(image, '.webp');
-    sharp(image)
-      .resize(200, 200)
-      .toFile(`${destinationFolder}${filename}-resized.webp`, (err, info) => {
-        // Gérer les erreurs
-        if (err) {
-          console.error(err);
-        } else {
-          // Afficher un message de succès pour chaque image redimensionnée
-          console.log(`Image ${filename} redimensionnée avec succès.`);
-        }
-      });
-  });
+  await pMap(images, resizeImage, { concurrency: 10 }); // Ici, nous utilisons pMap pour redimensionner les images 10 par 10
 }
 
 // Lancer le processus de redimensionnement des images
-resizeImages();
+resizeImages().catch(console.error); // Attraper et afficher les erreurs éventuelles
