@@ -1,4 +1,4 @@
-# PROJET EN PAUSE pour cause d'incompatibilité ESM
+# PROJET EN COURS
 
 # Optimisation d'images avec Gulp et Sharp
 
