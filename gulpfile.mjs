@@ -38,7 +38,10 @@ export function webpImage() {
 
 // Tâche d'observation
 export function watchTask() {
-    watch('src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}', series(optimizeImg, webpImage));
+    watch(
+        'src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}',
+        series(optimizeImg, webpImage, runSharp)
+    );
 }
 
 // Tâche par défaut
