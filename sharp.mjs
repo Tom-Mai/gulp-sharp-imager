@@ -12,7 +12,7 @@ const destinationFolder = 'dist/images/resized/';
 async function resizeImage(image) {
   const filename = path.basename(image, '.webp');
   await sharp(image)
-    .resize(200, 200)
+    .resize(270,200)
     .toFile(`${destinationFolder}${filename}-resized.webp`);
   console.log(`Image ${filename} redimensionnée avec succès.`);
 }

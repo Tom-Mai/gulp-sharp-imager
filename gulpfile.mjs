@@ -23,7 +23,7 @@ export function runSharp(cb) {
 export function optimizeImg() {
     return src(['src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}'])
         .pipe(imagemin([
-            imageminMozjpeg({quality:70, progressive:true}),
+            imageminMozjpeg({quality:70, progressive:true}), // 1 is low 100 is the highest.
             imageminOptipng({optimizationLevel:2}),
         ]))
         .pipe(dest('dist/images'));
@@ -38,7 +38,7 @@ export function webpImage() {
 
 // Tâche d'observation
 export function watchTask() {
-    watch('src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}', series(optimizeImg, webpImage));
+    watch('src/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}', series(optimizeImg, webpImage, runSharp));
 }
 
 // Tâche par défaut
