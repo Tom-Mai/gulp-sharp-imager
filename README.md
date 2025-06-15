@@ -30,8 +30,7 @@ Suivez les étapes ci-dessous pour installer les dépendances nécessaires :
 3. Installez les plugins nécessaires pour l'optimisation des images et la conversion en WebP :
 
     ```bash
-    npm install --save-dev gulp-webp
-    npm install --save-dev gulp-imagemin imagemin-mozjpeg imagemin-optipng
+    npm install --save-dev gulp-imagemin imagemin-mozjpeg imagemin-optipng imagemin-webp
     ```
 
     > **Note :** À partir de la version 8.0.0, gulp-imagemin utilise la syntaxe ESM, vous devez donc utiliser `import` plutôt que `require` pour importer vos dépendances. Assurez-vous d'ajouter `"type": "module"` à votre fichier `package.json`.

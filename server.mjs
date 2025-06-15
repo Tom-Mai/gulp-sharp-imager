@@ -4,6 +4,9 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
+import archiver from 'archiver';
+
+
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 const outputDir = 'public/output';
@@ -33,6 +36,17 @@ app.post('/upload', upload.array('images'), async (req, res) => {
     results.push({ name, url: '/output/' + name });
   }
   res.json(results);
+});
+
+
+app.get('/download-all', (req, res) => {
+  res.setHeader('Content-Type', 'application/zip');
+  res.setHeader('Content-Disposition', 'attachment; filename=images.zip');
+  const archive = archiver('zip', { zlib: { level: 9 } });
+  archive.on('error', err => res.status(500).send({ error: err.message }));
+  archive.pipe(res);
+  archive.directory(outputDir, false);
+  archive.finalize();
 });
 
 const PORT = process.env.PORT || 3000;

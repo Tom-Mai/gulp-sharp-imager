@@ -4,7 +4,7 @@ const {src, dest, watch, series} = gulp;
 import imagemin from 'gulp-imagemin';
 import imageminMozjpeg from 'imagemin-mozjpeg';
 import imageminOptipng from 'imagemin-optipng';
-import imagewebp from 'gulp-webp';
+import imageminWebp from 'imagemin-webp';
 import { spawn } from 'child_process';
 
 // Fonction pour exécuter sharp
@@ -32,7 +32,9 @@ export function optimizeImg() {
 // Conversion des images en webp
 export function webpImage() {
     return src('dist/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}')
-        .pipe(imagewebp())
+        .pipe(imagemin([
+            imageminWebp({ quality: 75 })
+        ]))
         .pipe(dest('dist/images/webp'));
 }
 

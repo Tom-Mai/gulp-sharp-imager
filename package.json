@@ -21,11 +21,13 @@
   },
   "dependencies": {
     "gulp-image-resize": "^0.13.1",
-    "gulp-webp": "^4.0.1",
     "imagemin-webp": "^8.0.0",
     "p-map": "^6.0.0",
     "sharp": "^0.32.2",
     "express": "^4.19.2",
-    "multer": "^1.4.5-lts.1"
+
+    "multer": "^1.4.5-lts.1",
+    "archiver": "^6.0.2"
+
   }
 }

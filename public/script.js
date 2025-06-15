@@ -1,6 +1,35 @@
 const dropZone = document.getElementById('drop-zone');
 const uploadBtn = document.getElementById('upload-btn');
 const imagesDiv = document.getElementById('images');
+const fileList = document.getElementById('file-list');
+let files = [];
+
+function updateFileList() {
+  fileList.innerHTML = '';
+  files.forEach(f => {
+    const div = document.createElement('div');
+    div.textContent = f.name;
+    fileList.appendChild(div);
+  });
+}
+
+function preview(data) {
+  data.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const img = document.createElement('img');
+    img.src = item.url;
+
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.download = item.name;
+    link.textContent = 'Télécharger';
+
+    card.appendChild(img);
+    card.appendChild(link);
+    imagesDiv.appendChild(card);
+
 let files = [];
 
 function preview(data) {
@@ -36,6 +65,9 @@ function send() {
     .then(data => {
       preview(data);
       files = [];
+
+      updateFileList();
+
     })
     .catch(err => console.error(err));
 }
@@ -47,6 +79,9 @@ dropZone.addEventListener('dragover', e => {
 dropZone.addEventListener('drop', e => {
   e.preventDefault();
   files = Array.from(e.dataTransfer.files);
+
+  updateFileList();
+
 });
 
 dropZone.addEventListener('click', () => {
@@ -55,6 +90,9 @@ dropZone.addEventListener('click', () => {
   input.multiple = true;
   input.onchange = e => {
     files = Array.from(e.target.files);
+
+    updateFileList();
+
   };
   input.click();
 });
