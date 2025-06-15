@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "gulp-image-resize": "^0.13.1",
-    "gulp-webp": "^4.0.1",
     "imagemin-webp": "^8.0.0",
     "p-map": "^6.0.0",
     "sharp": "^0.32.2",
