@@ -29,6 +29,24 @@ function preview(data) {
     card.appendChild(img);
     card.appendChild(link);
     imagesDiv.appendChild(card);
+
+let files = [];
+
+function preview(data) {
+  data.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'image-item';
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.download = item.name;
+    link.textContent = 'Télécharger ' + item.name;
+    const img = document.createElement('img');
+    img.src = item.url;
+    img.style.maxWidth = '200px';
+    div.appendChild(img);
+    div.appendChild(document.createElement('br'));
+    div.appendChild(link);
+    imagesDiv.appendChild(div);
   });
 }
 
@@ -47,7 +65,9 @@ function send() {
     .then(data => {
       preview(data);
       files = [];
+
       updateFileList();
+
     })
     .catch(err => console.error(err));
 }
@@ -59,7 +79,9 @@ dropZone.addEventListener('dragover', e => {
 dropZone.addEventListener('drop', e => {
   e.preventDefault();
   files = Array.from(e.dataTransfer.files);
+
   updateFileList();
+
 });
 
 dropZone.addEventListener('click', () => {
@@ -68,7 +90,9 @@ dropZone.addEventListener('click', () => {
   input.multiple = true;
   input.onchange = e => {
     files = Array.from(e.target.files);
+
     updateFileList();
+
   };
   input.click();
 });

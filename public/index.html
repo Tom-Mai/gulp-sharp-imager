@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Optimiseur d'images</title>
 <style>
+
 :root {
   --bg: #f6f7f9;
   --accent: #a0c4ff;
@@ -66,12 +67,20 @@ body {
   border-radius: 4px;
   text-decoration: none;
 }
+=======
+body {font-family: Arial, sans-serif; margin: 20px;}
+#drop-zone {border: 2px dashed #ccc; padding: 40px; text-align:center;}
+#images {margin-top:20px;}
+.image-item {margin:10px 0;}
+
 </style>
 </head>
 <body>
 <h1>Optimiseur d'images</h1>
 <div id="drop-zone">Glissez vos images ici ou cliquez pour sélectionner</div>
+
 <div id="file-list"></div>
+
 <form id="options">
 <label for="format">Format :</label>
 <select id="format">
@@ -85,7 +94,9 @@ body {
 <button id="upload-btn" type="button">Optimiser</button>
 </form>
 <div id="images"></div>
+
 <a href="/download-all" class="download-all">Télécharger tout</a>
+
 <script src="script.js"></script>
 </body>
 </html>

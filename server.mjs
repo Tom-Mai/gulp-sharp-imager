@@ -3,7 +3,9 @@ import multer from 'multer';
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
+
 import archiver from 'archiver';
+
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
@@ -35,6 +37,7 @@ app.post('/upload', upload.array('images'), async (req, res) => {
   }
   res.json(results);
 });
+
 
 app.get('/download-all', (req, res) => {
   res.setHeader('Content-Type', 'application/zip');
