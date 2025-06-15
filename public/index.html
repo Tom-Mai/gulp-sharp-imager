@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Optimiseur d'images</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --accent: #a0c4ff;
+  --card-bg: #ffffff;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: var(--bg);
+  color: #333;
+}
+#drop-zone {
+  border: 2px dashed var(--accent);
+  padding: 40px;
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#file-list {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+#images {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.card img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+.card a {
+  display: block;
+  margin-top: 5px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.download-all {
+  display: inline-block;
+  margin-top: 20px;
+  color: #fff;
+  background: var(--accent);
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<h1>Optimiseur d'images</h1>
+<div id="drop-zone">Glissez vos images ici ou cliquez pour sélectionner</div>
+<div id="file-list"></div>
+<form id="options">
+<label for="format">Format :</label>
+<select id="format">
+  <option value="jpg">JPG</option>
+  <option value="webp">WebP</option>
+</select>
+<label for="width">Largeur :</label>
+<input type="number" id="width" placeholder="ex: 800">
+<label for="height">Hauteur :</label>
+<input type="number" id="height" placeholder="ex: 600">
+<button id="upload-btn" type="button">Optimiser</button>
+</form>
+<div id="images"></div>
+<a href="/download-all" class="download-all">Télécharger tout</a>
+<script src="script.js"></script>
+</body>
+</html>
