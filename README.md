@@ -71,3 +71,13 @@ Nous utilisons `import { exec } from 'child_process';` dans notre fichier `gulpf
 2. Explorez d'autres outils ou plugins d'optimisation d'images qui sont compatibles avec votre environnement de projet.
 
 Ces solutions peuvent aider à surmonter les problèmes de compatibilité potentiels avec l'usage du format ESM.
+
+## Interface web
+
+Un petit serveur Express permet de téléverser des images et de les convertir directement depuis le navigateur. Démarrez-le avec :
+
+```bash
+node server.mjs
+```
+
+Ouvrez ensuite [http://localhost:3000](http://localhost:3000) pour accéder à la page de glisser‑déposer. Choisissez le format et la taille souhaités puis cliquez sur **Optimiser**. Les images traitées apparaissent plus bas avec un lien de téléchargement.
